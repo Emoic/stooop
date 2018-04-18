@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .page-header
+    h3 Access Log
+
+  if report
+    table.table
+      tr
+        th Card uid
+        th Name
+        th ID Card
+        th Pro field
+        th Score
+        th Score Type
+        th Note
+        th Date &amp; time
+      for r in report
+        tr
+          td= r.card_id
+          td= r.name
+          th= r.idcard
+          th= r.profield
+          th= r.score
+          th= r.score_type
+          th= r.note
+          td= moment(r.createdAt).format('DD.MM.YYYY, HH:mm')
+  else
+    h4 No items in access log found

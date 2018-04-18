@@ -8,7 +8,7 @@
         span.icon-bar
       a.navbar-brand(href='/')
         img.pull-left(src='/favicon.png' width='20')
-        | P.R.A.S.E.
+        | SWJTU MAKER . Jiang Town
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         if user
@@ -18,6 +18,8 @@
             a(href='/cards') Cards
           li(class=(title == 'Access Log') ? 'active' : undefined)
             a(href='/access-log') Access Log
+          li(class=(title == 'Score Report') ? 'active' : undefined)
+            a(href='/access-log/score/report') Score Report
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)

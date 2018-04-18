@@ -1,0 +1,26 @@
+extends ./layout
+
+block content
+  .page-header
+    h3 Profile Information
+
+  form.form-horizontal(method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group
+      label.col-sm-3.control-label(for='score') Score
+      .col-sm-7
+        input.form-control(type='score', name='score', id='score', value=log.score)
+    .form-group
+      label.col-sm-3.control-label(for='score_type') Score_type
+      .col-sm-7
+        input.form-control(type='score_type', name='score_type', id='score_type', value=log.score_type)
+    .form-group
+      label.col-sm-3.control-label(for='note') Note
+      .col-sm-7
+        input.form-control(type='note', name='note', id='note', value=log.note)
+
+    .form-group
+      .col-sm-offset-3.col-sm-4
+        button.btn.btn.btn-primary(type='submit')
+          i.fa.fa-pencil
+          | Update Score

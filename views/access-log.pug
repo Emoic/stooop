@@ -12,6 +12,7 @@ block content
         th Success
         th New card
         th User Score
+        th Score Type
         th Date &amp; time
         th
       for log in logs
@@ -33,8 +34,10 @@ block content
               h4.text-danger
                 i.fa.fa-times
           td=log.score
+          td=log.score_type
           td= moment(log.createdAt).format('DD.MM.YYYY, HH:mm')
           td.text-right
             a.btn.btn-primary(href='/cards/' + log.card_id) Manage card
+            a.btn.btn-info(href='/access-log/' + log._id) Score
   else
     h4 No items in access log found

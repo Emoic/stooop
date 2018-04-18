@@ -136,6 +136,9 @@ app.get('/cards/:id', passportConfig.isAuthenticated, cardsController.showCard);
 app.post('/cards/:id', passportConfig.isAuthenticated, cardsController.updateCard);
 app.get('/cards/delete/:id', passportConfig.isAuthenticated, cardsController.deleteCard);
 app.get('/access-log', passportConfig.isAuthenticated, logController.index);
+app.get('/access-log/score/report', passportConfig.isAuthenticated, logController.score_report);
+app.get('/access-log/:id', passportConfig.isAuthenticated, logController.showScore);
+app.post('/access-log/:id', passportConfig.isAuthenticated, logController.updateScore);
 app.get('/api/v1/access', apiController.index);
 
 /**
