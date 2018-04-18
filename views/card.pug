@@ -18,6 +18,26 @@ block content
       .col-sm-8
         input.form-control(type='text', name='name', id='name' value=card.name)
     .form-group
+      label(class='col-sm-2 control-label', for='idcard') idcard
+      .col-sm-8
+        input.form-control(type='text', name='idcard', id='idcard' value=card.idcard)
+    .form-group
+      label(class='col-sm-2 control-label', for='mobile') mobile
+      .col-sm-8
+        input.form-control(type='text', name='mobile', id='mobile' value=card.mobile)
+    .form-group
+      label(class='col-sm-2 control-label', for='qq') qq
+      .col-sm-8
+        input.form-control(type='text', name='qq', id='qq' value=card.qq)
+    .form-group
+      label(class='col-sm-2 control-label', for='memberid') memberid
+      .col-sm-8
+        input.form-control(type='text', name='memberid', id='memberid' value=card.memberid)
+    .form-group
+      label(class='col-sm-2 control-label', for='profield') profield
+      .col-sm-8
+        input.form-control(type='text', name='profield', id='profield' value=card.profield)
+    .form-group
       label(class='col-sm-2 control-label', for='description') Description
       .col-sm-8
         textarea.form-control(name='description', id='description', rows='7')= card.description

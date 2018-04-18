@@ -10,12 +10,14 @@ block content
         th ID
         th Name
         th Description
+        th profield
         th
       for card in cards
         tr
           td= card.uid
           td= card.name
           td= card.description
+          td= card.profield
           td.text-right
             .btn-group
               a.btn.btn-primary(href='/cards/' + card.uid) Manage

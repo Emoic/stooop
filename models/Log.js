@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
  * @typedef {Object} logSchema
  * @property {string} lock_id - ID of the lock
  * @property {string} card_id - ID of the card
+ * @property {Number} score - score of  user jifen
  * @property {boolean} success - If a request was successful
  * @property {boolean} new_card - If it was a new card
  */
@@ -17,6 +18,7 @@ const Schema = mongoose.Schema;
 const logSchema = new Schema({
   lock_id: String,
   card_id: String,
+  score: Number,
   success: Boolean,
   new_card: Boolean
 }, { timestamps: true });

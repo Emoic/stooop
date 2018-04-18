@@ -17,7 +17,7 @@ const Schema = mongoose.Schema;
  * @property {string} profile.location - Profile location
  * @property {string} profile.website - Profile website
  * @property {string} profile.picture - Profile picture
- */
+*/
 
 /**
  * Creates new userSchema
@@ -37,6 +37,7 @@ const userSchema = new Schema({
     location: String,
     website: String,
     picture: String
+
   }
 }, { timestamps: true });
 

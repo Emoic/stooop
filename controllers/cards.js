@@ -99,6 +99,11 @@ exports.updateCard = (req, res, next) => {
   Card.findOneAndUpdate({ uid: req.params.id }, {
     $set: {
       name: req.body.name,
+      idcard: req.body.idcard,
+      mobile: req.body.mobile,
+      qq: req.body.qq,
+      memberid: req.body.memberid,
+      profield: req.body.profield,
       description: req.body.description,
       locks: req.body.locks || []
     }

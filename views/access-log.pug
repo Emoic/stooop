@@ -11,6 +11,7 @@ block content
         th Card uid
         th Success
         th New card
+        th User Score
         th Date &amp; time
         th
       for log in logs
@@ -31,6 +32,7 @@ block content
             else
               h4.text-danger
                 i.fa.fa-times
+          td=log.score
           td= moment(log.createdAt).format('DD.MM.YYYY, HH:mm')
           td.text-right
             a.btn.btn-primary(href='/cards/' + log.card_id) Manage card
