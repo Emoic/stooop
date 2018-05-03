@@ -87,6 +87,33 @@ exports.postLock = (req, res, next) => {
   });
 };
 
+
+
+
+/**
+ * POST /locks/:id - Lock detail update.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
+ */
+exports.updateLock = (req, res, next) => {
+  req.assert('name').notEmpty();
+
+  Lock.findOneAndUpdate({ uid: req.params.id }, {
+    $set: {
+      name: req.body.name,
+      description: req.body.description
+    }
+  }, (err) => {
+    if (err) return next(err);
+
+    req.flash('success', { msg: 'Lock updated successfully.' });
+
+    res.redirect('/locks/');
+  });
+};
+
+
 /**
  * GET /locks/delete/:id - Delete lock.
  * @param  {Object} req - Express Request Object
