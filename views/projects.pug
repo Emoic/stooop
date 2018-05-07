@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  .page-header
+    h3 Projects
+
+  if projects
+    table.table
+      tr
+        th ID
+        th Name
+        th Description
+        th
+      for project in projects
+        tr
+          td= project.uid
+          td= project.name
+          td= project.description
+          td.text-right
+            .btn-group
+              a.btn.btn-primary(href='/projects/' + project.uid) Manage
+              a.btn.btn-danger(href='/projects/delete/' + project.uid, onClick='return confirm("Really delete this project?")') Delete
+  else
+    h4 No projects found
+
+  .page-header
+    h3 Add new project
+
+  form.form-horizontal(method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group
+      label(class='col-sm-2 control-label', for='uid') UID
+      .col-sm-8
+        input.form-control(type='text', name='uid', id='uid')
+    .form-group
+      label(class='col-sm-2 control-label', for='name') Name
+      .col-sm-8
+        input.form-control(type='text', name='name', id='name')
+    .form-group
+      label(class='col-sm-2 control-label', for='description') Description
+      .col-sm-8
+        textarea.form-control(name='description', id='description', rows='7')
+    .form-group
+      .col-sm-offset-2.col-sm-8
+        button.btn.btn-primary(type='submit')
+          i.fa.fa-envelope
+          | Save

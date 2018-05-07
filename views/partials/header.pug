@@ -12,6 +12,8 @@
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         if user
+          li(class=(title == 'Projects') ? 'active' : undefined)
+            a(href='/projects') Projects
           li(class=(title == 'Locks') ? 'active' : undefined)
             a(href='/locks') Locks
           li(class=(title == 'Cards') ? 'active' : undefined)
