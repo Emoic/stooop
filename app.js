@@ -28,6 +28,7 @@ dotenv.load({ silent: true });
  * Controllers (route handlers).
  */
 const userController = require('./controllers/user');
+const projectsController = require('./controllers/projects');
 const locksController = require('./controllers/locks');
 const cardsController = require('./controllers/cards');
 const logController = require('./controllers/access-log');
@@ -47,7 +48,7 @@ const app = express();
  * Connect to MongoDB.
  */
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+mongoose.connection.openUri(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
 mongoose.connection.on('error', () => {
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
@@ -127,6 +128,13 @@ app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
+
+app.get('/projects', passportConfig.isAuthenticated, projectsController.index);
+app.get('/projects/:id', passportConfig.isAuthenticated, projectsController.showProject);
+app.post('/projects/:id', passportConfig.isAuthenticated, projectsController.updateProject);
+app.post('/projects', passportConfig.isAuthenticated, projectsController.postProject);
+app.get('/projects/delete/:id', passportConfig.isAuthenticated, projectsController.deleteProject);
+
 app.get('/locks', passportConfig.isAuthenticated, locksController.index);
 app.get('/locks/:id', passportConfig.isAuthenticated, locksController.showLock);
 app.post('/locks/:id', passportConfig.isAuthenticated, locksController.updateLock);
