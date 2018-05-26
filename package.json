@@ -5,9 +5,9 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/ParalelniPolis/rfid-access-system-api-2.git"
+    "url": "https://github.com/swjtu-maker/stooop"
   },
-  "author": "Pavel Ševčík",
+  "author": "Bloomlj",
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
