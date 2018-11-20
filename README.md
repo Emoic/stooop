@@ -1,9 +1,6 @@
-# Polis RFID Access System Extended 2
+# A Makerspace Management System,based :Polis RFID Access System Extended 2
 
-Web API for [RFID access system](https://github.com/ParalelniPolis/rfid-locks) at [Paralelni Polis](https://www.paralelnipolis.cz/).
-
-[![CircleCI](https://circleci.com/gh/ParalelniPolis/rfid-access-system-api-2/tree/master.svg?style=svg)](https://circleci.com/gh/ParalelniPolis/rfid-access-system-api-2/tree/master)
-[![Status of Dependencies](https://david-dm.org/ParalelniPolis/rfid-access-system-api-2.svg)](https://david-dm.org/ParalelniPolis/rfid-access-system-api-2)
+Web API for [RFID access system](https://github.com/ParalelniPolis/rfid-locks)
 
 
 ## Dependencies
@@ -19,12 +16,12 @@ Make sure you have the necessary [dependencies](#dependencies) before continuing
 
 Get the code:
 ```
-git clone git@github.com:ParalelniPolis/rfid-access-system-api-2.git
+git clone https://github.com/swjtu-maker/stooop
 ```
 
 Change into the project directory:
 ```
-cd rfid-access-system-api-2
+cd stooop
 ```
 
 Install application dependencies via npm or yarn:
