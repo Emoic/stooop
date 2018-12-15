@@ -17,8 +17,9 @@ const Schema = mongoose.Schema;
 const projectSchema = new Schema({
   uid: { type: String, unique: true },
   name: String,
+  url:String,
   description: String,
-  piecture:String
+  picture:String
 }, { timestamps: true });
 
 const project = mongoose.model('project', projectSchema);

@@ -67,6 +67,7 @@ exports.postProject = (req, res, next) => {
   const project = new Project({
     uid: req.body.uid,
     name: req.body.name,
+    url:req.body.url,
     description: req.body.description
   });
 
@@ -102,6 +103,7 @@ exports.updateProject = (req, res, next) => {
   Project.findOneAndUpdate({ uid: req.params.id }, {
     $set: {
       name: req.body.name,
+      url: req.body.url,
       description: req.body.description
     }
   }, (err) => {
