@@ -121,7 +121,7 @@ exports.postSignup = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.redirect('/locks');
+        res.redirect('/projects');
       });
     });
   });
@@ -159,13 +159,15 @@ exports.findByEmail = (req, res,next) => {
  * @param  {Object} res - Express Response Object
  */
 exports.accountList = (req, res,next) => {
+
   User.find().exec((err, accountList) =>{ 
     if (err) return next(err);
-    res.render('accountList', {
+    res.render('account/accountList', {
         title: 'AccountList',
         accountList
       });
   });
+    console.log("sssdd");
 };
 
 /**
@@ -191,7 +193,8 @@ exports.postUpdateProfile = (req, res, next) => {
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
     user.profile.gender = req.body.gender || '';
-    user.profile.type = req.body.type || '';
+    console.log(req.body.type);
+    user.type = req.body.type || '';
     user.profile.level = req.body.level || '';
     user.profile.idcard = req.body.idcard || '';
     user.profile.mobile = req.body.mobile || '';
