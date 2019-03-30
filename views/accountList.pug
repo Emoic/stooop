@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .page-header
+    h3 AccountList
+
+  if accountList
+    table.table
+      tr
+        th Email
+        th Name
+        th Sex
+        th IDcard
+        th
+      for user in accountList
+        tr
+          td= user.email
+          td= user.profile.name
+          td= user.profile.gender
+          td= user.profile.idcard
+          td.text-right
+            .btn-group
+              a.btn.btn-primary(href='/account/findByEmail' + user.email) Manage
+  else
+    h4 No cards found

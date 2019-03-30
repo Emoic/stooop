@@ -125,9 +125,12 @@ app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
+app.get('/account/accountList', passportConfig.isAuthenticated, userController.accountList);
+app.get('/account/findByEmail:email', passportConfig.isAuthenticated, userController.findByEmail);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
+app.post('/account/delete2', passportConfig.isAuthenticated, userController.postDeleteAccount2);
 
 app.get('/projects', passportConfig.isAuthenticated, projectsController.index);
 app.get('/projects/:id', passportConfig.isAuthenticated, projectsController.showProject);

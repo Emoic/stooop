@@ -11,12 +11,17 @@ const Schema = mongoose.Schema;
  * @property {string} passwordResetToken - User password reset token
  * @property {Date} passwordResetExpires - Date when password reset token expires
  * @property {Array} tokens
+ * @property {string} type - User type  
  * @property {Object} profile
  * @property {string} profile.name - Profile name
  * @property {string} profile.gender - Profile gender
  * @property {string} profile.location - Profile location
  * @property {string} profile.website - Profile website
  * @property {string} profile.picture - Profile picture
+ * @property {string} profile.idcard - Profile idcard
+ * @property {string} profile.mobile - Profile mobile
+ * @property {string} profile.qq - Profile qq
+ * @property {string} profile.description - Profile description
 */
 
 /**
@@ -30,13 +35,18 @@ const userSchema = new Schema({
   passwordResetExpires: Date,
 
   tokens: Array,
-
+  type:String,
   profile: {
     name: String,
     gender: String,
     location: String,
     website: String,
-    picture: String
+    picture: String,
+    level:String,
+    idcard:String,
+    mobile:String,
+    qq:String,
+    description: String,
 
   }
 }, { timestamps: true });

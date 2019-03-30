@@ -91,6 +91,8 @@ exports.postSignup = (req, res, next) => {
   req.assert('password', 'Password must be at least 4 characters long').len(4);
   req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
   req.assert('email', 'You must use valid e-mail address').contains(process.env.MAIL_STRING);
+  req.assert('idcard', 'idcard is not valid').isNull();
+
   req.sanitize('email').normalizeEmail({ remove_dots: false });
 
   const errors = req.validationErrors();
@@ -99,10 +101,12 @@ exports.postSignup = (req, res, next) => {
     req.flash('errors', errors);
     return res.redirect('/signup');
   }
-
+  console.log(req.body.profile);
   const user = new User({
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    type:'account',
+    profile:req.body.profile
   });
 
   User.findOne({ email: req.body.email }, (err, existingUser) => {
@@ -135,6 +139,36 @@ exports.getAccount = (req, res) => {
 };
 
 /**
+ * GET /account/findByEmail- Profile page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ */
+exports.findByEmail = (req, res,next) => {
+  User.findOne({email: req.params.email})
+  .exec((err, account) =>{
+    if (err) return next(err);
+    res.render('account/profile2', {
+      account
+    });
+  }); 
+};
+
+/**
+ * GET /account/findAccountList - Profile page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ */
+exports.accountList = (req, res,next) => {
+  User.find().exec((err, accountList) =>{ 
+    if (err) return next(err);
+    res.render('accountList', {
+        title: 'AccountList',
+        accountList
+      });
+  });
+};
+
+/**
  * POST /account/profile - Update profile information.
  * @param  {Object} req - Express Request Object
  * @param  {Object} res - Express Response Object
@@ -151,13 +185,20 @@ exports.postUpdateProfile = (req, res, next) => {
     return res.redirect('/account');
   }
 
-  User.findById(req.user.id, (err, user) => {
+  User.findById(req.body.id, (err, user) => {
+    console.log(req.body.level);
     if (err) { return next(err); }
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
     user.profile.gender = req.body.gender || '';
+    user.profile.type = req.body.type || '';
+    user.profile.level = req.body.level || '';
+    user.profile.idcard = req.body.idcard || '';
+    user.profile.mobile = req.body.mobile || '';
+    user.profile.qq = req.body.qq || '';
     user.profile.location = req.body.location || '';
     user.profile.website = req.body.website || '';
+    user.profile.description = req.body.description || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -214,6 +255,15 @@ exports.postDeleteAccount = (req, res, next) => {
     res.redirect('/login');
   });
 };
+exports.postDeleteAccount2 = (req, res, next) => {
+  console.log(req.body.id);
+  User.remove({ _id: req.body.id }, (err) => {
+    if (err) { return next(err); }
+    req.flash('info', { msg: 'Your account has been deleted.' });
+    res.redirect('/account/accountList');
+  });
+};
+
 
 /**
  * GET /account/unlink/:provider - Unlink OAuth provider.
