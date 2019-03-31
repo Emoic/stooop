@@ -20,8 +20,24 @@ exports.creatAccountByCard = (req, res, next) => {
     User.findOne({ email: card.qq+"@qq.com" }, (err, existingUser) => {
       if (err) { return next(err); }
       if (existingUser) {
-        req.flash('errors', { msg: 'Account with that email address already exists.' });
-        return res.redirect('/cards');
+        Card.findOneAndUpdate({ uid: req.params.id }, {
+          $set: {
+            memberid: card.qq+"@qq.com",
+          }
+        }, (err) => {
+          if (err) return next(err);
+              existingUser.profile.profield = card.profield;
+              existingUser.save((err) => {
+                if (err) { return next(err); }
+              });
+
+          req.flash('success', { msg: 'Card updated successfully.' });
+
+          res.redirect('/cards/');
+        });
+
+        //req.flash('errors', { msg: 'Account with that email address already exists.' });
+        //return res.redirect('/cards');
       }
       const user = new User({
         email: card.qq+"@qq.com",
@@ -29,12 +45,11 @@ exports.creatAccountByCard = (req, res, next) => {
         type:'account',
         profile:{name:card.name,level : "1",idcard : card.idcard,
           mobile : card.mobile,qq : card.qq,description : card.description,profield:card.profield}
-
       });
       user.save((err) => {
         if (err) { return next(err); }
         req.flash('success', { msg: 'account created successfully.' });
-        return res.redirect('/cards');
+        return res.redirect('/cards/');
         console.log(user.email+"CreatAccountSuccess");
       });
     });

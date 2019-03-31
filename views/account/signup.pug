@@ -6,24 +6,24 @@ block content
   form.form-horizontal(id='signup-form', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group
-      label.col-sm-3.control-label(for='email') Email
+      label.col-sm-3.control-label(for='email') 账号
       .col-sm-7
         input.form-control(type='email', name='email', id='email', placeholder='Email',autofocus, required)
     .form-group
-      label.col-sm-3.control-label(for='password') Password
+      label.col-sm-3.control-label(for='password') 密码
       .col-sm-7
         input.form-control(type='password', name='password', id='password', placeholder='Password', required)
     .form-group
-      label.col-sm-3.control-label(for='confirmPassword') Confirm Password
+      label.col-sm-3.control-label(for='confirmPassword') 确认密码
       .col-sm-7
         input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
 
     .form-group
-      label.col-sm-3.control-label(for='name') Name
+      label.col-sm-3.control-label(for='name') 姓名
       .col-sm-7
         input.form-control(type='text', name='profile[name]', id='name', required)
     .form-group
-      label.col-sm-3.control-label Gender
+      label.col-sm-3.control-label 性别
       .col-sm-7
         label.radio.col-sm-3
           input(type='radio', name='profile[gender]', value='male', data-toggle='radio')
@@ -35,7 +35,7 @@ block content
           input(type='radio', name='profile[gender]', value='other', data-toggle='radio')
           span Other
     .form-group
-      label.col-sm-3.control-label(for='idcard') levle
+      label.col-sm-3.control-label(for='idcard') 等级
       .col-sm-7
         select.form-control(name='profile[level]', id='level', required)
           option(value="1") 一级
@@ -45,11 +45,11 @@ block content
           option(value="5") 五级
 
     .form-group
-      label.col-sm-3.control-label(for='idcard') idcard
+      label.col-sm-3.control-label(for='idcard') 学号/身份证
       .col-sm-7
         input.form-control(type='text', name='profile[idcard]', id='idcard', required)
     .form-group
-      label(class='col-sm-3 control-label', for='mobile') mobile
+      label(class='col-sm-3 control-label', for='mobile') 手机号码
       .col-sm-7
         input.form-control(type='text', name='profile[mobile]', id='mobile' , required)
     .form-group
@@ -57,19 +57,19 @@ block content
       .col-sm-7
         input.form-control(type='text', name='profile[qq]', id='qq' , required)
     .form-group
-      label(class='col-sm-3 control-label', for='profield') profield
+      label(class='col-sm-3 control-label', for='profield') 专业
       .col-sm-7
         input.form-control(type='text', name='profile[profield]', id='profield' , required)
     .form-group
-      label.col-sm-3.control-label(for='location') Location
+      label.col-sm-3.control-label(for='location') 地址
       .col-sm-7
         input.form-control(type='text', name='profile[location]', id='location')
     .form-group
-      label.col-sm-3.control-label(for='website') Website
+      label.col-sm-3.control-label(for='website') 网站
       .col-sm-7
         input.form-control(type='text', name='profile[website]', id='website')
     .form-group
-      label(class='col-sm-3 control-label', for='description') Description
+      label(class='col-sm-3 control-label', for='description') 介绍
       .col-sm-7
         textarea.form-control(name='profile[description]', id='description', rows='7', required)
     .form-group
