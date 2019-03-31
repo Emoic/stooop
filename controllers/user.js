@@ -109,6 +109,8 @@ exports.postSignup = (req, res, next) => {
     type:'account',
     profile:req.body.profile
   });
+  //set default level is 1
+    user.profile.level = 1;
 
   User.findOne({ email: req.body.email }, (err, existingUser) => {
     if (err) { return next(err); }
@@ -151,7 +153,7 @@ exports.findByEmail = (req, res,next) => {
     res.render('account/profile2', {
       account
     });
-  }); 
+  });
 };
 
 /**
@@ -160,7 +162,7 @@ exports.findByEmail = (req, res,next) => {
  * @param  {Object} res - Express Response Object
  */
 exports.accountList = (req, res,next) => {
-  User.find().exec((err, accountList) =>{ 
+  User.find().exec((err, accountList) =>{
     if (err) return next(err);
     res.render('account/accountList', {
         title: 'AccountList',

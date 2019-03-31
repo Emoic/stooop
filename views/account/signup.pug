@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   .page-header
-    h3 Sign up
+    h3 Sign Up For Makers
   form.form-horizontal(id='signup-form', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group
@@ -34,16 +34,6 @@ block content
         label.radio.col-sm-3
           input(type='radio', name='profile[gender]', value='other', data-toggle='radio')
           span Other
-    .form-group
-      label.col-sm-3.control-label(for='idcard') 等级
-      .col-sm-7
-        select.form-control(name='profile[level]', id='level', required)
-          option(value="1") 一级
-          option(value="2") 二级
-          option(value="3") 三级
-          option(value="4") 四级
-          option(value="5") 五级
-
     .form-group
       label.col-sm-3.control-label(for='idcard') 学号/身份证
       .col-sm-7
