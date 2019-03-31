@@ -12,10 +12,10 @@ block content
         th Description
       for card in cards
         tr
-          td= card.uid
+          td= card.uid 
           td
             for locks in card.locks
-              i.alert.alert-info= locks.name
+              i= locks.name
           td= card.description
           td.text-right
             .btn-group
