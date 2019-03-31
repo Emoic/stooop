@@ -13,8 +13,9 @@ block content
       for card in cards
         tr
           td= card.uid
-          for locks in card.locks
-           tr= locks.name 
+          td
+            for locks in card.locks
+              i=locks.name 
           td= card.description
           td.text-right
             .btn-group
