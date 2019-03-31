@@ -9,15 +9,15 @@ block content
       tr
         th ID
         th Name
-        th IDcard
+        th LocksId
         th Description
         th profield
         th
       for card in cards
         tr
           td= card.uid
-          td= card.locks
-          td= card.idcard
+          td= card.locks.uid
+          td= card.locks.name
           td= card.description
           td= card.profield
           td.text-right
