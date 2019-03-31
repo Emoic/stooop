@@ -15,7 +15,7 @@ block content
           td= card.uid
           td
             for locks in card.locks
-              i=locks.name 
+              i.alert.alert-info= locks.name, 
           td= card.description
           td.text-right
             .btn-group
