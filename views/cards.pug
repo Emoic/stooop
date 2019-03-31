@@ -9,17 +9,13 @@ block content
       tr
         th ID
         th Name
-        th LocksId
         th Description
-        th profield
-        th
       for card in cards
         tr
           td= card.uid
-          td= card.locks.uid
-          td= card.locks.name
+          for locks in card.locks
+           tr= locks.name 
           td= card.description
-          td= card.profield
           td.text-right
             .btn-group
               a.btn.btn-primary(href='/cards/' + card.uid) Manage
