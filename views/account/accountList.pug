@@ -11,13 +11,15 @@ block content
         th Name
         th gender
         th IDcard
+        th profield
         th
       for user in accountList
         tr
           td= user.email
           td= user.profile.name
           td= user.profile.gender
-          td= user.profile.idcard
+          td= user.profile.IDcard
+          td= user.profile.profield
           td.text-right
             .btn-group
               a.btn.btn-primary(href='/account/findByEmail' + user.email) Manage
