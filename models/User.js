@@ -47,7 +47,7 @@ const userSchema = new Schema({
     mobile:String,
     qq:String,
     description: String,
-
+    profield:String
   }
 }, { timestamps: true });
 

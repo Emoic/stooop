@@ -28,7 +28,7 @@ exports.creatAccountByCard = (req, res, next) => {
         password: card.mobile,
         type:'account',
         profile:{name:card.name,level : "1",idcard : card.idcard,
-          mobile : card.mobile,qq : card.qq,description : card.description}
+          mobile : card.mobile,qq : card.qq,description : card.description,profield:card.profield}
 
       });
       user.save((err) => {
