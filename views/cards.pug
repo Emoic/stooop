@@ -24,5 +24,6 @@ block content
             .btn-group
               a.btn.btn-primary(href='/cards/' + card.uid) Manage
               a.btn.btn-danger(href='/cards/delete/' + card.uid, onClick='return confirm("Really delete this card?")') Delete
+              a.btn.btn-primary(href='/cards/creatAccountByCard/'+card.uid) CreatAccount
   else
     h4 No cards found

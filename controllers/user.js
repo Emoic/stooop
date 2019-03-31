@@ -5,6 +5,7 @@ const mailgunTransport = require('nodemailer-mailgun-transport');
 const passport = require('passport');
 const User = require('../models/User');
 
+
 /**
  * User module.
  * @module controllers/user
@@ -159,7 +160,6 @@ exports.findByEmail = (req, res,next) => {
  * @param  {Object} res - Express Response Object
  */
 exports.accountList = (req, res,next) => {
-
   User.find().exec((err, accountList) =>{ 
     if (err) return next(err);
     res.render('account/accountList', {
@@ -167,8 +167,8 @@ exports.accountList = (req, res,next) => {
         accountList
       });
   });
-    console.log("sssdd");
 };
+
 
 /**
  * POST /account/profile - Update profile information.
@@ -188,7 +188,6 @@ exports.postUpdateProfile = (req, res, next) => {
   }
 
   User.findById(req.body.id, (err, user) => {
-    console.log(req.body.level);
     if (err) { return next(err); }
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';

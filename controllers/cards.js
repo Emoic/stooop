@@ -1,10 +1,45 @@
 const Card = require('../models/Card');
 const Lock = require('../models/Lock');
+const User = require('../models/User');
 
 /**
  * Log module.
  * @module controllers/cards
  */
+
+/**
+ * GET /cards/creatAccountByCard - Cards page.
+ * @param  {Object} res - Express Response Object
+ * @param  {Object} card - Card Object
+ * @param  {Function} next - Express Middleware Function
+ */
+exports.creatAccountByCard = (req, res, next) => {
+   Card.findOne({ uid: req.params.id }).exec((err, card) =>{
+    if (err) return next(err);
+    console.log(card.qq+"@qq.com");
+    User.findOne({ email: card.qq+"@qq.com" }, (err, existingUser) => {
+      if (err) { return next(err); }
+      if (existingUser) {
+        req.flash('errors', { msg: 'Account with that email address already exists.' });
+        return res.redirect('/cards');
+      }
+      const user = new User({
+        email: card.qq+"@qq.com",
+        password: card.mobile,
+        type:'account',
+        profile:{name:card.name,level : "1",idcard : card.idcard,
+          mobile : card.mobile,qq : card.qq,description : card.description}
+
+      });
+      user.save((err) => {
+        if (err) { return next(err); }
+        req.flash('success', { msg: 'account created successfully.' });
+        return res.redirect('/cards');
+        console.log(user.email+"CreatAccountSuccess");
+      });
+    });
+   });
+};
 
 /**
  * Private render function - Card Detail
