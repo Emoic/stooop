@@ -146,6 +146,7 @@ app.post('/locks/:id', passportConfig.isAuthenticated, locksController.updateLoc
 app.post('/locks', passportConfig.isAuthenticated, locksController.postLock);
 app.get('/locks/delete/:id', passportConfig.isAuthenticated, locksController.deleteLock);
 app.get('/cards', passportConfig.isAuthenticated, cardsController.index);
+app.get('/cards/findMyCards', passportConfig.isAuthenticated, cardsController.findMyCards);
 app.get('/cards/:id', passportConfig.isAuthenticated, cardsController.showCard);
 app.post('/cards/:id', passportConfig.isAuthenticated, cardsController.updateCard);
 app.get('/cards/delete/:id', passportConfig.isAuthenticated, cardsController.deleteCard);

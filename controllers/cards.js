@@ -50,7 +50,6 @@ exports.creatAccountByCard = (req, res, next) => {
         if (err) { return next(err); }
         req.flash('success', { msg: 'account created successfully.' });
         return res.redirect('/cards/');
-        console.log(user.email+"CreatAccountSuccess");
       });
     });
    });
@@ -181,3 +180,26 @@ exports.deleteCard = (req, res, next) => {
     res.redirect('/cards');
   });
 };
+
+/**
+ * GET /cards/findMyCards - Cards page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
+ */
+exports.findMyCards = (req, res, next) => {
+  console.log(req.params.email);
+  Card.find({ memberid:req.params.email })
+    .populate('locks')
+    .exec((err, cards) => {
+      if (err) return next(err);
+
+      if (cards.length === 0) cards = null;
+
+      res.render('cards', {
+        title: 'Cards',
+        cards
+      });
+    });
+};
+

@@ -14,12 +14,13 @@
         if user
           li(class=(title == 'Projects') ? 'active' : undefined)
             a(href='/projects') Projects
+          li(class=(title == 'Cards') ? 'active' : undefined)
+              a(href='/cards/findMyCards') MyCards
           if user.type=='manager'
             li(class=(title == 'Locks') ? 'active' : undefined)
               a(href='/locks') Locks
-            if user.type=='manager'
-              li(class=(title == 'Cards') ? 'active' : undefined)
-                a(href='/cards') Cards
+            li(class=(title == 'Cards') ? 'active' : undefined)
+              a(href='/cards') Cards
             li(class=(title == 'Access Log') ? 'active' : undefined)
               a(href='/access-log') Access Log
             li(class=(title == 'Score Report') ? 'active' : undefined)
