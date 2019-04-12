@@ -15,7 +15,7 @@
           li(class=(title == 'Projects') ? 'active' : undefined)
             a(href='/projects') Projects
           li(class=(title == 'Cards') ? 'active' : undefined)
-              a(href='/cards/findMyCards') MyCards
+              a(href='/cards/findMyCards'+ user.email) MyCards
           if user.type=='manager'
             li(class=(title == 'Locks') ? 'active' : undefined)
               a(href='/locks') Locks

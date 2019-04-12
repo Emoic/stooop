@@ -127,6 +127,8 @@ app.post('/signup', userController.postSignup);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.get('/account/findByEmail:email', passportConfig.isAuthenticated, userController.findByEmail);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
+app.post('/account/profile2', passportConfig.isAuthenticated, userController.postUpdateProfile2);
+
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 
@@ -146,10 +148,11 @@ app.post('/locks/:id', passportConfig.isAuthenticated, locksController.updateLoc
 app.post('/locks', passportConfig.isAuthenticated, locksController.postLock);
 app.get('/locks/delete/:id', passportConfig.isAuthenticated, locksController.deleteLock);
 app.get('/cards', passportConfig.isAuthenticated, cardsController.index);
-app.get('/cards/findMyCards', passportConfig.isAuthenticated, cardsController.findMyCards);
+app.get('/cards/findMyCards:email', passportConfig.isAuthenticated, cardsController.findMyCards);
 app.get('/cards/:id', passportConfig.isAuthenticated, cardsController.showCard);
 app.post('/cards/:id', passportConfig.isAuthenticated, cardsController.updateCard);
 app.get('/cards/delete/:id', passportConfig.isAuthenticated, cardsController.deleteCard);
+app.get('/cards/delete2/:id', passportConfig.isAuthenticated, cardsController.deleteCard2);
 app.get('/cards/creatAccountByCard/:id', passportConfig.isAuthenticated, cardsController.creatAccountByCard);
 app.get('/access-log', passportConfig.isAuthenticated, logController.index);
 app.get('/access-log/score/report', passportConfig.isAuthenticated, logController.score_report);

@@ -136,6 +136,7 @@ exports.showCard = (req, res, next) => {
     });
 };
 
+
 /**
  * POST /cards/:id - Card detail update.
  * @param  {Object} req - Express Request Object
@@ -158,13 +159,19 @@ exports.updateCard = (req, res, next) => {
     }
   }, (err) => {
     if (err) return next(err);
-
     req.flash('success', { msg: 'Card updated successfully.' });
-
-    res.redirect('/cards/');
+    res.redirect('/cards/findMyCards'+req.user.email);
   });
 };
 
+function deleteCard(req, res, next){
+   Card.findOneAndRemove({ uid: req.params.id }, (err) => {
+    if (err) return next(err);
+
+    req.flash('success', { msg: 'Card deleted successfully.' });
+      
+  });
+}
 /**
  * GET /cards/delete/:id - Delete card
  * @param  {Object} req - Express Request Object
@@ -172,14 +179,12 @@ exports.updateCard = (req, res, next) => {
  * @param  {Function} next - Express Middleware Function
  */
 exports.deleteCard = (req, res, next) => {
-  Card.findOneAndRemove({ uid: req.params.id }, (err) => {
-    if (err) return next(err);
-
-    req.flash('success', { msg: 'Card deleted successfully.' });
-
-    res.redirect('/cards');
-  });
+ res.redirect('/cards/');
 };
+exports.deleteCard2 = (req, res, next) => {
+ res.redirect('/cards/findMyCards'+req.user.email);
+};
+
 
 /**
  * GET /cards/findMyCards - Cards page.
@@ -196,8 +201,8 @@ exports.findMyCards = (req, res, next) => {
 
       if (cards.length === 0) cards = null;
 
-      res.render('cards', {
-        title: 'Cards',
+      res.render('myCards', {
+        title: 'MyCards',
         cards
       });
     });

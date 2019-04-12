@@ -14,19 +14,19 @@ block content
       .col-sm-8
         input.form-control(type='text', name='uid', id='uid' value=card.uid disabled)
     .form-group
-      label(class='col-sm-2 control-label', for='memberid') memberid
+      label(class='col-sm-2 control-label', for='memberid') 账号
       .col-sm-8
-        input.form-control(type='text', name='memberid', id='memberid' value=card.memberid )
+        input.form-control(type='text', name='memberid', id='memberid', placeholder='登陆的邮箱', value=card.memberid )
     .form-group
-      label(class='col-sm-2 control-label', for='name') Name
+      label(class='col-sm-2 control-label', for='name') 姓名
       .col-sm-8
         input.form-control(type='text', name='name', id='name' value=card.name)
     .form-group
-      label(class='col-sm-2 control-label', for='idcard') idcard
+      label(class='col-sm-2 control-label', for='idcard') 学号/身份证
       .col-sm-8
         input.form-control(type='text', name='idcard', id='idcard' value=card.idcard)
     .form-group
-      label(class='col-sm-2 control-label', for='mobile') mobile
+      label(class='col-sm-2 control-label', for='mobile') 手机号码
       .col-sm-8
         input.form-control(type='text', name='mobile', id='mobile' value=card.mobile)
     .form-group
@@ -34,11 +34,11 @@ block content
       .col-sm-8
         input.form-control(type='text', name='qq', id='qq' value=card.qq)
     .form-group
-      label(class='col-sm-2 control-label', for='profield') profield
+      label(class='col-sm-2 control-label', for='profield') 学院专业
       .col-sm-8
         input.form-control(type='text', name='profield', id='profield' value=card.profield)
     .form-group
-      label(class='col-sm-2 control-label', for='description') Description
+      label(class='col-sm-2 control-label', for='description') 介绍
       .col-sm-8
         textarea.form-control(name='description', id='description', rows='7')= card.description
     .form-group

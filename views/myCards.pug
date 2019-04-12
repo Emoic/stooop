@@ -2,15 +2,13 @@ extends layout
 
 block content
   .page-header
-    h3 Cards
+    h3 MyCards
 
   if cards
     table.table
       tr
         th ID
         th locks
-        th memberid
-        th 是否绑定账户
         th Description
         th
       for card in cards
@@ -20,17 +18,11 @@ block content
             if card.locks          
               for locks in card.locks
                 i= locks.name
-          td= card.memberid
-          td
-            if card.memberid
-              i yes
-            else
-              i no
           td= card.description
           td.text-right
             .btn-group
               a.btn.btn-primary(href='/cards/' + card.uid) Manage
-              a.btn.btn-danger(href='/cards/delete/' + card.uid, onClick='return confirm("Really delete this card?")') Delete
-              a.btn.btn-primary(href='/cards/creatAccountByCard/'+card.uid) CreatAccount
+              a.btn.btn-danger(href='/cards/delete2/' + card.uid, onClick='return confirm("Really delete this card?")') Delete
+             
   else
     h4 No cards found

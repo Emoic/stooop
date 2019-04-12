@@ -93,6 +93,11 @@ exports.postSignup = (req, res, next) => {
   req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
   req.assert('email', 'You must use valid e-mail address').contains(process.env.MAIL_STRING);
   req.assert('idcard', 'idcard is not valid').isNull();
+  if (req.body.profile.idcard.length<10||req.body.profile.idcard.length>18) {
+      console.log(req.body.profile.idcard.length);
+      req.flash('errors', { msg: '学号/身份证必须是10-18位' });
+      return res.redirect('/signup');
+  };
 
   req.sanitize('email').normalizeEmail({ remove_dots: false });
 
@@ -102,7 +107,6 @@ exports.postSignup = (req, res, next) => {
     req.flash('errors', errors);
     return res.redirect('/signup');
   }
-  console.log(req.body.profile);
   const user = new User({
     email: req.body.email,
     password: req.body.password,
@@ -181,9 +185,16 @@ exports.accountList = (req, res,next) => {
  * @param  {Function} next - Express Middleware Function
  */
 exports.postUpdateProfile = (req, res, next) => {
-  req.assert('email', 'Please enter a valid email address.').isEmail();
-  req.sanitize('email').normalizeEmail({ remove_dots: false });
-
+  postUpdateProfile(req, res, next);
+        res.redirect('/account');
+};
+exports.postUpdateProfile2 = (req, res, next) => {
+  postUpdateProfile(req, res, next);
+        res.redirect('/account/accountList');
+};
+function postUpdateProfile(req, res, next){
+req.assert('email', 'Please enter a valid email address.').isEmail();
+  req.sanitize('email').normalizeEmail({ remove_dots: false });     
   const errors = req.validationErrors();
 
   if (errors) {
@@ -196,7 +207,6 @@ exports.postUpdateProfile = (req, res, next) => {
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
     user.profile.gender = req.body.gender || '';
-    console.log(req.body.type);
     user.type = req.body.type || '';
     user.profile.level = req.body.level || '';
     user.profile.idcard = req.body.idcard || '';
@@ -215,7 +225,6 @@ exports.postUpdateProfile = (req, res, next) => {
         return next(err);
       }
       req.flash('success', { msg: 'Profile information has been updated.' });
-      res.redirect('/account');
     });
   });
 };
