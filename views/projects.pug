@@ -30,6 +30,7 @@ block content
 
   form.form-horizontal(method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='userId', value=user._id)
     .form-group
       label(class='col-sm-2 control-label', for='uid') UID
       .col-sm-8

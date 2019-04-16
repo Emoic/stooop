@@ -137,6 +137,8 @@ app.post('/account/delete2', passportConfig.isAuthenticated, userController.post
 
 
 app.get('/projects', passportConfig.isAuthenticated, projectsController.index);
+app.get('/myProjects', passportConfig.isAuthenticated, projectsController.findMyProjects);
+app.post('/myProjects', passportConfig.isAuthenticated, projectsController.postProject);
 app.get('/projects/:id', passportConfig.isAuthenticated, projectsController.showProject);
 app.post('/projects/:id', passportConfig.isAuthenticated, projectsController.updateProject);
 app.post('/projects', passportConfig.isAuthenticated, projectsController.postProject);

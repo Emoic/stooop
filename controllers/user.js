@@ -128,7 +128,7 @@ exports.postSignup = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.redirect('/projects');
+        res.redirect('/projects/findMyProjects');
       });
     });
   });
@@ -186,10 +186,12 @@ exports.accountList = (req, res,next) => {
  */
 exports.postUpdateProfile = (req, res, next) => {
   postUpdateProfile(req, res, next);
+  req.flash('success', { msg: 'Profile information has been updated.' });
         res.redirect('/account');
 };
 exports.postUpdateProfile2 = (req, res, next) => {
   postUpdateProfile(req, res, next);
+  req.flash('success', { msg: 'Profile information has been updated.' });
         res.redirect('/account/accountList');
 };
 function postUpdateProfile(req, res, next){
@@ -224,7 +226,6 @@ req.assert('email', 'Please enter a valid email address.').isEmail();
         }
         return next(err);
       }
-      req.flash('success', { msg: 'Profile information has been updated.' });
     });
   });
 };

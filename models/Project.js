@@ -15,7 +15,8 @@ const Schema = mongoose.Schema;
  * @class
  */
 const projectSchema = new Schema({
-  uid: { type: String, unique: true },
+  uid: { type: String, unique: true }, //项目唯一索引
+  userId:String,//关联用户id
   name: String,
   url:String,
   description: String,

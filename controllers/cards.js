@@ -74,7 +74,7 @@ const renderDetail = (res, card, locks) => {
  * @param  {Object} req - Express Request Object
  * @param  {Object} res - Express Response Object
  * @param  {Function} next - Express Middleware Function
- */
+ */ 
 exports.index = (req, res, next) => {
   Card.find()
     .populate('locks')
@@ -193,7 +193,6 @@ exports.deleteCard2 = (req, res, next) => {
  * @param  {Function} next - Express Middleware Function
  */
 exports.findMyCards = (req, res, next) => {
-  console.log(req.params.email);
   Card.find({ memberid:req.params.email })
     .populate('locks')
     .exec((err, cards) => {

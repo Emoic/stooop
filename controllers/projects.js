@@ -26,6 +26,25 @@ exports.index = (req, res, next) => {
 };
 
 /**
+ * GET /projects/findMyProject - Projects page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
+ */
+exports.findMyProjects = (req, res, next) => {
+  Project.find({ userId:req.user._id }).exec((err, projects) => {
+    if (err) return next(err);
+
+    if (projects.length === 0) projects = null;
+
+    res.render('projects', {
+      title: 'Projects',
+      projects
+    });
+  });
+};
+
+/**
  * GET /cards/:id - Card detail page.
  * @param  {Object} req - Express Request Object
  * @param  {Object} res - Express Response Object
@@ -54,6 +73,7 @@ exports.showProject = (req, res, next) => {
  * @param  {Function} next - Express Middleware Function
  */
 exports.postProject = (req, res, next) => {
+  console.log(req.user._id);
   req.assert('uid').notEmpty();
   req.assert('name').notEmpty();
 
@@ -61,11 +81,12 @@ exports.postProject = (req, res, next) => {
 
   if (errors) {
     req.flash('errors', errors);
-    return res.redirect('/projects');
+    return res.redirect('/myProjects');
   }
 
   const project = new Project({
     uid: req.body.uid,
+    userId:req.body.userId,
     name: req.body.name,
     url:req.body.url,
     description: req.body.description
@@ -75,7 +96,7 @@ exports.postProject = (req, res, next) => {
     if (err) { return next(err); }
     if (existingProject) {
       req.flash('errors', { msg: 'This project already exists' });
-      return res.redirect('/projects');
+      return res.redirect('/myProjects');
     }
 
     project.save((err) => {
@@ -83,7 +104,7 @@ exports.postProject = (req, res, next) => {
 
       req.flash('success', { msg: 'Project created successfully.' });
 
-      res.redirect('/projects');
+      res.redirect('/myProjects');
     });
   });
 };
@@ -111,7 +132,7 @@ exports.updateProject = (req, res, next) => {
 
     req.flash('success', { msg: 'Project updated successfully.' });
 
-    res.redirect('/projects/');
+    res.redirect('/myProjects/');
   });
 };
 
@@ -128,6 +149,6 @@ exports.deleteProject = (req, res, next) => {
 
     req.flash('success', { msg: 'Project deleted successfully.' });
 
-    res.redirect('/projects');
+    res.redirect('/myProjects');
   });
 };

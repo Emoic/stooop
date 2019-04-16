@@ -12,15 +12,17 @@
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         if user
-          li(class=(title == 'Projects') ? 'active' : undefined)
-            a(href='/projects') Projects
-          li(class=(title == 'Cards') ? 'active' : undefined)
+          li(class=(title == 'MyProjects') ? 'active' : undefined)
+            a(href='/myProjects') MyProjects
+          li(class=(title == 'MyCards') ? 'active' : undefined)
               a(href='/cards/findMyCards'+ user.email) MyCards
           if user.type=='manager'
+            li(class=(title == 'Projects') ? 'active' : undefined)
+              a(href='/projects') ProjectList
             li(class=(title == 'Locks') ? 'active' : undefined)
               a(href='/locks') Locks
             li(class=(title == 'Cards') ? 'active' : undefined)
-              a(href='/cards') Cards
+              a(href='/cards') CardList
             li(class=(title == 'Access Log') ? 'active' : undefined)
               a(href='/access-log') Access Log
             li(class=(title == 'Score Report') ? 'active' : undefined)

@@ -10,7 +10,7 @@ block content
     .form-group
       label.col-sm-3.control-label(for='email') Email
       .col-sm-7
-        input.form-control(type='email', name='email', id='email', value=user.email)
+        input.form-control(type='email', name='email', id='email', value=user.email readonly)
     .form-group
       label.col-sm-3.control-label(for='name') Name
       .col-sm-7
@@ -37,15 +37,6 @@ block content
           label.radio.col-sm-3
             input(type='radio', checked=user.type=='manager', name='type', value='manager', data-toggle='radio')
             span manager
-    .form-group
-      label.col-sm-3.control-label(for='idcard') level
-      .col-sm-7
-        select.form-control(name='level', id='level', required)
-          option(value="1") 一级
-          option(value="2") 二级
-          option(value="3") 三级
-          option(value="4") 四级
-          option(value="5") 五级
     .form-group
       label.col-sm-3.control-label(for='name') idcard
       .col-sm-7
