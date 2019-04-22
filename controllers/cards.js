@@ -19,41 +19,43 @@ exports.creatAccountByCard = (req, res, next) => {
     console.log(card.qq+"@qq.com");
     User.findOne({ email: card.qq+"@qq.com" }, (err, existingUser) => {
       if (err) { return next(err); }
-      // if (existingUser) {
-      //   Card.findOneAndUpdate({ uid: req.params.id }, {
-      //     $set: {
-      //       memberid: card.qq+"@qq.com",
-      //     }
-      //   }, (err) => {
-      //     if (err) return next(err);
-      //         existingUser.profile.profield = card.profield;
-      //         existingUser.save((err) => {
-      //           if (err) { return next(err); }
-      //         });
+      if (existingUser) {
+        Card.findOneAndUpdate({ uid: req.params.id }, {
+          $set: {
+            memberid: card.qq+"@qq.com",
+          }
+        }, (err) => {
+          if (err) return next(err);
+              // existingUser.profile.profield = card.profield;
+              // existingUser.save((err) => {
+              //   if (err) { return next(err); }
+              // });
 
-      //     req.flash('success', { msg: 'Card updated successfully.' });
+          req.flash('success', { msg: 'Card updated successfully.' });
 
-      //     res.redirect('/cards/');
-      //   });
+          res.redirect('/cards/');
+        });
 
-      //   //req.flash('errors', { msg: 'Account with that email address already exists.' });
-      //   //return res.redirect('/cards');
-      // }
-      const user = new User({
-        email: card.qq+"@qq.com",
-        password: card.mobile,
-        type:'account',
-        profile:{name:card.name,level : "1",idcard : card.idcard,
-          mobile : card.mobile,qq : card.qq,description : card.description,profield:card.profield}
-      });
-      user.save((err) => {
-        if (err) { return next(err); }
-        req.flash('success', { msg: 'account created successfully.' });
-        return res.redirect('/cards/');
-      });
+        //req.flash('errors', { msg: 'Account with that email address already exists.' });
+        //return res.redirect('/cards');
+      }
+      // const user = new User({
+      //   email: card.qq+"@qq.com",
+      //   password: card.mobile,
+      //   type:'account',
+      //   profile:{name:card.name,level : "1",idcard : card.idcard,
+      //     mobile : card.mobile,qq : card.qq,description : card.description,profield:card.profield}
+      // });
+      // user.save((err) => {
+      //   if (err) { return next(err); }
+      //   req.flash('success', { msg: 'account created successfully.' });
+      //   return res.redirect('/cards/');
+      // });
     });
    });
 };
+
+
 
 /**
  * Private render function - Card Detail
