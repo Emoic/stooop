@@ -42,12 +42,13 @@ const userSchema = new Schema({
     location: String,
     website: String,
     picture: String,
-    level:String,
-    idcard:String,
+    level:String,           //会员等级
+    idcard:String,          //学号/身份证
     mobile:String,
     qq:String,
-    description: String,
-    profield:String
+    description: String,    //个人简介
+    profield:String,        //学院专业
+    signSafetyRegulations:String  //是否签署创客空间安全规章
   }
 }, { timestamps: true });
 

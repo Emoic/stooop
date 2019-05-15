@@ -12,6 +12,7 @@ block content
         th gender
         th IDcard
         th profield
+        th signSafetyRegulations
         th
       for user in accountList
         tr
@@ -20,6 +21,13 @@ block content
           td= user.profile.gender
           td= user.profile.idcard
           td= user.profile.profield
+          td 
+            if user.profile.signSafetyRegulations
+              h4.text-primary
+                i.fa.fa-check 
+            else
+              h4.text-danger
+                i.fa.fa-times
           td.text-right
             .btn-group
               a.btn.btn-primary(href='/account/findByEmail' + user.email) Manage
