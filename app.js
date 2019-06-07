@@ -59,6 +59,12 @@ mongoose.connection.on('error', () => {
  */
 app.locals.moment = moment;
 
+
+
+const multer = require('multer');
+const upload = multer({dest:'/public/img/'});
+app.use(multer({dest:"/public/img/"}).single("profile_pic"));
+
 /**
  * Express configuration.
  */
@@ -86,6 +92,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+//上传头像请求
+app.post('/account/changePortrait', passportConfig.isAuthenticated, userController.changePortrait);
+//配置静态资源请求
+app.use('/public', express.static('public'));
+ 
+
 app.use((req, res, next) => {
   lusca.csrf()(req, res, next);
 });
@@ -95,13 +108,30 @@ app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
 });
+
+//扫描二维码显示个人信息，无需登录验证
+const User = require('./models/User');
+app.use((req, res, next) => {
+  if (!req.user && 
+    req.path.indexOf('/account/getPersonalInformation')>-1){
+    User.findById(req.query.id, (err, user) => {
+    if (err) { return next(err); }
+    res.render('account/personalInformation', {
+      title: 'personalInformation',
+      user
+    });
+  });
+  }else{next();}
+
+});
+
 app.use((req, res, next) => {
   // After successful login, redirect back to the intended page
   if (!req.user &&
-      req.path !== '/login' &&
-      req.path !== '/signup' &&
-      !req.path.match(/^\/auth/) &&
-      !req.path.match(/\./)) {
+    req.path !== '/login' &&
+    req.path !== '/signup' &&
+    !req.path.match(/^\/auth/) &&
+    !req.path.match(/\./)) {
     req.session.returnTo = req.path;
   } else if (req.user &&
       req.path === '/account') {
@@ -128,13 +158,11 @@ app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.get('/account/findByEmail:email', passportConfig.isAuthenticated, userController.findByEmail);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/profile2', passportConfig.isAuthenticated, userController.postUpdateProfile2);
-
+app.get('/account/creatIDCard/:id', passportConfig.isAuthenticated, userController.creatIDCard);
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
-
 app.get('/account/accountList', passportConfig.isAuthenticated, userController.accountList);
 app.post('/account/delete2', passportConfig.isAuthenticated, userController.postDeleteAccount2);
-
 
 app.get('/projects', passportConfig.isAuthenticated, projectsController.index);
 app.get('/myProjects', passportConfig.isAuthenticated, projectsController.findMyProjects);

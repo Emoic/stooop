@@ -128,7 +128,7 @@ exports.postSignup = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.redirect('/projects/findMyProjects');
+        res.redirect('/login');
       });
     });
   });
@@ -169,13 +169,11 @@ exports.accountList = (req, res,next) => {
   User.find().exec((err, accountList) =>{
     if (err) return next(err);
     res.render('account/accountList', {
-        title: 'AccountList',
-        accountList
-      });
+      title: 'AccountList',
+      accountList
+    });
   });
 };
-
-
 
 
 /**
@@ -203,7 +201,6 @@ req.assert('email', 'Please enter a valid email address.').isEmail();
     req.flash('errors', errors);
     return res.redirect('/account');
   }
-
   User.findById(req.body.id, (err, user) => {
     if (err) { return next(err); }
     user.email = req.body.email || '';
@@ -468,3 +465,71 @@ exports.postForgot = (req, res, next) => {
     res.redirect('/forgot');
   });
 };
+
+
+/**
+ * GET /account/creatIDCard - IdCard page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ */
+exports.creatIDCard = (req, res,next) => {
+  console.log(req.user.id);
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    res.render('account/IDCard', {
+      title: 'IDCard',
+      user
+    });
+  });
+};
+
+
+const path = require('path');
+const fs = require('fs');
+/**
+ * POST /account/changePortrait - IdCard page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ */
+exports.changePortrait= (req, res, next) => {   
+  //post传输方法要用body
+  var fname=req.file.fieldname;//获取上传文件的名字
+  var oname=req.file.originalname;//获取上传文件的原始名字
+  //var load=path.join(__dirname,'..');返回上一层的地址这里用变量load接收了
+  var load=path.join(__dirname,'..');
+
+  /*文件上传后默认是一堆字符串的名字并且没有后缀名称的未知格式文件，
+  这里我们要用req.files查看原始文件的数据并且读取，待读取成功后进行下一步操作*/
+  fs.readFile(req.file.path,(err,data)=>{
+    //读取失败，说明没有上传成功
+    if(err){return res.send('上传失败')}  
+    //否则读取成功，开始写入
+    //声明图片名字为时间戳和随机数拼接成的，尽量确保唯一性
+    let time=Date.now()+parseInt(Math.random()*999)+parseInt(Math.random()*2222);
+    //拓展名
+    let extname=req.file.mimetype.split('/')[1]
+    //拼接成图片名
+    let keepname=time+'.'+extname      
+    // 三个参数
+    //1.图片的绝对路径
+    //2.写入的内容
+    //3.回调函数  
+    fs.writeFile(path.join(load,'/public/img/'+keepname),data,(err)=>{
+    //写入文件
+      if(err){
+        return res.send('上传失败');
+      }
+      User.findById(req.user.id, (err, user) => {
+        if (err) { return next(err); }
+        user.profile.picture = '/public/img/'+keepname;
+        user.save((err) => {
+          if (err) { return next(err); }
+          req.flash('success', { msg: 'Portrait has been changed.' });
+          res.redirect('/account/creatIDCard/'+req.user.id);
+        });
+      });
+    });
+  }); 
+};
+
+

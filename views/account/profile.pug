@@ -8,6 +8,9 @@ block content
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='id', value=user.id)
     .form-group
+      .col-sm-offset-3.col-sm-4
+        a.btn.btn-primary(href='/account/creatIDCard/' + user.id)  MyIDCard
+    .form-group
       label.col-sm-3.control-label(for='email') Email
       .col-sm-7
         input.form-control(type='email', name='email', id='email', value=user.email readonly)
@@ -70,6 +73,9 @@ block content
         button.btn.btn.btn-primary(type='submit')
           i.fa.fa-pencil
           | Update Profile
+    .form-group
+      .col-sm-offset-3.col-sm-4
+        a.btn.btn-primary(href='/account/creatIDCard/' + user.id)  CreatIDCard
 
   .page-header
     h3 Change Password

@@ -1,4 +1,4 @@
-const Card = require('../models/Card');
+ const Card = require('../models/Card');
 const Lock = require('../models/Lock');
 const User = require('../models/User');
 
@@ -16,43 +16,48 @@ const User = require('../models/User');
 exports.creatAccountByCard = (req, res, next) => {
    Card.findOne({ uid: req.params.id }).exec((err, card) =>{
     if (err) return next(err);
-    console.log(card.qq+"@qq.com");
-    User.findOne({ email: card.qq+"@qq.com" }, (err, existingUser) => {
-      if (err) { return next(err); }
+
+    //添加老会员账户学院信息
+    User.findOne({email: card.qq+"@qq.com"})
+    .exec((err, existingUser) =>{
+      if (err) {return next(err);}
+
+      existingUser.profile.profield = card.profield;
+      existingUser.save((err) => {       
+        if (err) {return next(err);}
+      });
+
       if (existingUser) {
+        //会员卡绑定到老会员账户上
         Card.findOneAndUpdate({ uid: req.params.id }, {
           $set: {
             memberid: card.qq+"@qq.com",
           }
         }, (err) => {
           if (err) return next(err);
-              // existingUser.profile.profield = card.profield;
-              // existingUser.save((err) => {
-              //   if (err) { return next(err); }
-              // });
-
-          req.flash('success', { msg: 'Card updated successfully.' });
-
-          res.redirect('/cards/');
         });
-
-        //req.flash('errors', { msg: 'Account with that email address already exists.' });
-        //return res.redirect('/cards');
+        req.flash('success', { msg: 'update already exists.' });
+        return res.redirect('/cards/');
       }
+      // 根据会员卡创建账号
       // const user = new User({
       //   email: card.qq+"@qq.com",
       //   password: card.mobile,
       //   type:'account',
-      //   profile:{name:card.name,level : "1",idcard : card.idcard,
-      //     mobile : card.mobile,qq : card.qq,description : card.description,profield:card.profield}
+      //   profile:{name:card.name,level : "1",
+      //     idcard : card.idcard,
+      //     mobile : card.mobile,
+      //     qq : card.qq,
+      //     description : card.description,
+      //     profield:card.profield}
       // });
       // user.save((err) => {
       //   if (err) { return next(err); }
       //   req.flash('success', { msg: 'account created successfully.' });
       //   return res.redirect('/cards/');
       // });
-    });
-   });
+    });   
+  });
 };
 
 
@@ -181,10 +186,12 @@ function deleteCard(req, res, next){
  * @param  {Function} next - Express Middleware Function
  */
 exports.deleteCard = (req, res, next) => {
- res.redirect('/cards/');
+  deleteCard(req, res, next);
+  res.redirect('/cards/');
 };
 exports.deleteCard2 = (req, res, next) => {
- res.redirect('/cards/findMyCards'+req.user.email);
+  deleteCard(req, res, next);
+  res.redirect('/cards/findMyCards'+req.user.email);
 };
 
 

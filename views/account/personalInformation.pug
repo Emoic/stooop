@@ -1,0 +1,59 @@
+extends ../layout2
+
+
+
+block content
+  .page-header
+    h3 个人信息
+
+  form.form-horizontal(action='', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='id', value=user.id)
+    .form-group
+      label.col-sm-3.control-label(for='email') 编号
+      .col-sm-7
+        input.form-control(type='email', name='id', id='id', value=user.id readonly)
+    .form-group
+      label.col-sm-3.control-label(for='email') 邮箱
+      .col-sm-7
+        input.form-control(type='email', name='email', id='email', value=user.email readonly)
+    .form-group
+      label.col-sm-3.control-label(for='name') 姓名
+      .col-sm-7
+        input.form-control(type='text', name='name', id='name', value=user.profile.name)
+    .form-group
+      label.col-sm-3.control-label 性别
+      .col-sm-6
+        label.radio.col-sm-3
+          input(type='radio', checked=user.profile.gender=='male', name='gender', value='male', data-toggle='radio')
+          span Male
+        label.radio.col-sm-3
+          input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
+          span Female
+        label.radio.col-sm-3
+          input(type='radio', checked=user.profile.gender=='other', name='gender', value='other', data-toggle='radio')
+          span Other
+    if user.type=='manager'
+      .form-group
+        label.col-sm-3.control-label 会员类型
+        .col-sm-6
+          label.radio.col-sm-3
+            input(type='radio', checked=user.type=='account', name='type', value='account', data-toggle='radio')
+            span account
+          label.radio.col-sm-3
+            input(type='radio', checked=user.type=='manager', name='type', value='manager', data-toggle='radio')
+            span manager
+    .form-group
+      label.col-sm-3.control-label(for='name') 学号/身份证
+      .col-sm-7
+        input.form-control(type='text', name='idcard', id='idcard', value=user.profile.idcard)
+    .form-group
+      label.col-sm-3.control-label(for='name') 学院专业
+      .col-sm-7
+        input.form-control(type='text', name='profield', id='profield', value=user.profile.profield)
+    .form-group
+      label(class='col-sm-3 control-label', for='description') 简介
+      .col-sm-7
+        textarea.form-control(name='description', id='description', rows='7')=user.profile.description
+
+

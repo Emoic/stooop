@@ -73,7 +73,6 @@ exports.showProject = (req, res, next) => {
  * @param  {Function} next - Express Middleware Function
  */
 exports.postProject = (req, res, next) => {
-  console.log(req.user._id);
   req.assert('uid').notEmpty();
   req.assert('name').notEmpty();
 
