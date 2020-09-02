@@ -1,4 +1,5 @@
-# A Makerspace Management System,based :Polis RFID Access System Extended 2
+# A Makerspace Management System Developed by Southwest Jiaotong University Makerspace ,based :Polis RFID Access System Extended 2
+
 
 Web API for [RFID access system](https://github.com/ParalelniPolis/rfid-locks)
 
