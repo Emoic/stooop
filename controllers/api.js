@@ -39,6 +39,8 @@ exports.index = (req, res, next) => {
 
   const lockId = req.query.lock;
   const cardId = req.query.card;
+  //是否定时同步数据用的心跳数据，y的话，只返回结果，不记录log。
+  const issync = req.query.issync;
 
   Card.findOne({ uid: cardId })
     .populate('locks')
@@ -73,8 +75,10 @@ exports.index = (req, res, next) => {
         new_card: false
       });
 
-      // Save log information
-      log.save(err => next(err));
+      // Save log information,如果不是门锁自动的同步请求的话。
+      if('y' != issync){
+        log.save(err => next(err));
+      }
 
       // Return answer
       res.json(makeResponseObject(lockId, canAccess));
