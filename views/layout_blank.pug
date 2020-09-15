@@ -7,11 +7,11 @@ html
     meta(name='robots' content='noindex,nofollow')
     meta(name='theme-color' content='#4DA5F4')
     meta(name='csrf-token', content=_csrf)
-    title #{title} - XiaCheJian
+    title #{title} - 交大创客空间管理平台 XiaCheJian
     link(rel='shortcut icon', href='/favicon.png')
     link(rel='stylesheet', href='/css/main.css')
-    link(rel='stylesheet', href='/css/IDCard.css')
   body
+    include partials/header_blank
 
     .container
       include partials/flash
@@ -23,4 +23,4 @@ html
     script(src='/js/lib/bootstrap.min.js')
     script(src='/js/lib/qrcode.js')
     script(src='/js/main.js')
-    script(src='/js/QRcode.js')
+    block customscript

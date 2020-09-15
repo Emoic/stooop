@@ -163,13 +163,15 @@ exports.updateCard = (req, res, next) => {
       memberid: req.body.memberid,
       profield: req.body.profield,
       description: req.body.description,
-      whoaddid:req.user.email,
+      whoupdate:req.user.email,
+      rank:req.body.rank,
+      checked:req.body.checked,
       locks: req.body.locks || []
     }
   }, (err) => {
     if (err) return next(err);
     req.flash('success', { msg: 'Card updated successfully.' });
-    res.redirect('/cards/findMyCards'+req.user.email);
+    res.redirect('/cards');
   });
 };
 
@@ -181,6 +183,79 @@ function deleteCard(req, res, next){
 
   });
 }
+
+
+
+/**
+ * GET /card-apply/:id - Card apply page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
+ */
+exports.showCardApply = (req, res, next) => {
+  Card.findOne({ uid: req.params.id })
+    .exec((err, card) => {
+      if (err) return next(err);
+      console.log(!card);
+
+      if (!card) {
+          newCard = new Card({
+            uid: req.params.id,
+            name: '',
+            description: '',
+            locks: []
+          });
+          res.render('card-apply', {
+            title: `申请会员`,
+            card:newCard
+          });
+        }else{
+          res.render('card-apply-result', {
+            title: `查看会员门禁申请状态`,
+            card
+          });
+        }
+      });
+};
+
+/**
+ * POST /card-apply/:id - Card apply do.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
+ */
+exports.doCardApply = (req, res, next) => {
+  Card.findOne({ uid: req.params.id })
+    .exec((err, card) => {
+      if (err) return next(err);
+      console.log(req.params.id);
+      if (!card) {
+          newCard = new Card({
+            uid: req.params.id,
+            name: req.body.name,
+            idcard: req.body.idcard,
+            mobile: req.body.mobile,
+            memberid:req.body.memberid,
+            qq:req.body.qq,
+            profield:req.body.profield,
+            description: req.body.description,
+            locks: []
+          });
+          console.log(newCard);
+          newCard.save((err, card) => {
+            if (err) return next(err);
+            console.log(card);
+            console.log(err);
+            req.flash('success', { msg: '申请已成功提交。' });
+            res.redirect('/card-apply/'+req.params.id);
+          });
+
+        }else{
+          req.flash('false', { msg: '该卡片已经被注册过' });
+        }
+      });
+};
+
 /**
  * GET /cards/delete/:id - Delete card
  * @param  {Object} req - Express Request Object

@@ -181,6 +181,8 @@ app.get('/cards', passportConfig.isAuthenticated, cardsController.index);
 app.get('/cards/findMyCards:email', passportConfig.isAuthenticated, cardsController.findMyCards);
 app.get('/cards/:id', passportConfig.isAuthenticated, cardsController.showCard);
 app.post('/cards/:id', passportConfig.isAuthenticated, cardsController.updateCard);
+app.get('/card-apply/:id', cardsController.showCardApply);
+app.post('/card-apply/:id', cardsController.doCardApply);
 app.get('/cards/delete/:id', passportConfig.isAuthenticated, cardsController.deleteCard);
 app.get('/cards/delete2/:id', passportConfig.isAuthenticated, cardsController.deleteCard2);
 app.get('/cards/creatAccountByCard/:id', passportConfig.isAuthenticated, cardsController.creatAccountByCard);

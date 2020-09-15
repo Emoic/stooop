@@ -8,12 +8,11 @@ const Schema = mongoose.Schema;
  * @property {string} name - Name of the card
  * @property {string} description - description of the card
  * @property {Object[]} locks - Associated locks
-  * @property {string} profile.idcard - Profile about
-  * @property {string} profile.mobile - Profile about
-  * @property {string} profile.qq - Profile about
-  * @property {string} profile.memberid - Profile about
-  * @property {string} profile.profield - Profile about
-
+  * @property {string} idcard - Profile about
+  * @property {string} mobile - Profile about
+  * @property {string} qq - Profile about
+  * @property {string} memberid - 邮箱
+  * @property {string} profield - 擅长领域
  */
 
 /**
@@ -29,7 +28,9 @@ const cardSchema = new Schema({
   memberid:String,
   description: String,
   profield:String,
-  whoaddid:String,
+  whoupdate:String,
+  rank:Number,
+  checked:Boolean,
   locks: [{ type: Schema.Types.ObjectId, ref: 'Lock' }]
 }, { timestamps: true });
 

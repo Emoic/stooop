@@ -1,0 +1,28 @@
+extends layout_blank
+
+block content
+
+  .page-header
+    h3 申请状态
+    
+  h4 我的信息
+  ul
+    li= '姓名:'+ card.name
+    li= '学号/身份证:'+ card.idcard
+    li= '手机:'+ card.mobile
+  h4 申请结果
+  ul
+    li
+      - if(card.checked)
+        b.result.alert-success 已通过审核
+      - else
+        b.result.alert-danger 审核中
+    li#qrcode
+    
+block customscript
+  - if(card.checked)
+    script(type='text/javascript').
+      new QRCode(document.getElementById("qrcode"), {text: window.location.href,width: 200,height: 200,colorDark : "#569845",colorLight : "#ffffff",correctLevel : QRCode.CorrectLevel.H});	
+  - else
+    script(type='text/javascript').
+      new QRCode(document.getElementById("qrcode"), {text: window.location.href,width: 200,height: 200,colorDark : "#ff00ff",colorLight : "#ffffff",correctLevel : QRCode.CorrectLevel.H});	  
