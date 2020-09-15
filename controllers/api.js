@@ -65,8 +65,9 @@ exports.index = (req, res, next) => {
       }
 
       // Check if card can access requested lock
-      const canAccess = !!card.locks.find(lock => lock.uid === lockId);
-
+      //const canAccess = !!card.locks.find(lock => lock.uid === lockId);
+      //除了检查锁的权限外，增加一个选项，卡是否通过审核。
+      const canAccess = !!card.locks.find(lock => lock.uid === lockId)&&card.checked;
       // Create log information
       const log = new Log({
         lock_id: lockId,
