@@ -29,6 +29,7 @@ const cardSchema = new Schema({
   memberid:String,
   description: String,
   profield:String,
+  whoaddid:String,
   locks: [{ type: Schema.Types.ObjectId, ref: 'Lock' }]
 }, { timestamps: true });
 

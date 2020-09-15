@@ -11,7 +11,7 @@ block content
         th locks
         th memberid
         th name
-        th 是否绑定账号
+        th 添加人
         th Description
         th
       for card in cards
@@ -23,13 +23,7 @@ block content
                 i= locks.name
           td= card.name
           td= card.memberid
-          td
-            if card.memberid
-              h4.text-primary
-                i.fa.fa-check
-            else
-              h4.text-danger
-                i.fa.fa-times
+          td= card.whoaddid
           td= card.description
           td.text-right
             .btn-group

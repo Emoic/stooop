@@ -163,6 +163,7 @@ exports.updateCard = (req, res, next) => {
       memberid: req.body.memberid,
       profield: req.body.profield,
       description: req.body.description,
+      whoaddid:req.user.email,
       locks: req.body.locks || []
     }
   }, (err) => {
