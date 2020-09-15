@@ -13,7 +13,8 @@ block content
         th 手机
         th 邮箱
         th 学院专业
-        th 确认人
+        th 级别
+        th 状态
         th 操作
       for card in cards
         tr
@@ -26,10 +27,12 @@ block content
           td= card.mobile
           td= card.memberid
           td= card.profield
-          td= card.whoaddid
+          td= card.rank
+          td= card.checked
           td.text-right
             .btn-group
               a.btn.btn-primary(href='/cards/' + card.uid) Manage
+              =card.whoupdate
               a.btn.btn-danger(href='/cards/delete/' + card.uid, onClick='return confirm("Really delete this card?")') Delete
   else
     h4 No cards found
