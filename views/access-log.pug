@@ -35,7 +35,7 @@ block content
                 i.fa.fa-times
           td=log.score
           td=log.score_type
-          td= moment(log.createdAt).format('DD.MM.YYYY, HH:mm')
+          td= moment(log.createdAt).format('YYYY.MM.DD, HH:mm')
           td.text-right
             a.btn.btn-primary(href='/cards/' + log.card_id) Manage card
             a.btn.btn-info(href='/access-log/' + log._id) Score

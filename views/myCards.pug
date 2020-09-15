@@ -25,6 +25,17 @@ block content
               a.btn.btn-danger(href='/cards/delete2/' + card.uid, onClick='return confirm("确定删除吗？")') Delete
 
   else
-    h4 No cards found
-    log.lock_id
-    log.timestamps
+    h4 没有绑定一卡通
+    if logs
+      table
+        tr
+          th 门锁
+          th 卡号
+          th 刷卡时间
+        for log in logs
+          tr
+            td= log.lock_id
+            td= log.card_id
+            td= moment(log.createdAt).format('YYYY.MM.DD, HH:mm')
+            td
+              a.btn.btn-primary(href='/cards/' + log.card_id) Manage card

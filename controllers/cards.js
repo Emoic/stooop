@@ -210,17 +210,23 @@ exports.findMyCards = (req, res, next) => {
 
       if (cards.length === 0) cards = null;
 
-      //查看新卡
-        Log.findOne({new_card:true}).exec((err, log) => {
+      //查看2分钟以内新卡刷卡记录，自助注册。
+      var twominsago = new Date(new Date().getTime() - 1000*60*2);
+      //console.log(new Date());
+      //console.log(twominsago);
+      //now2.setMinutes(now2.getMinutes()-2000);
+        Log.find({new_card:true,createdAt:{$gte:twominsago}}).exec((err, logs) => {
           if (err) { return next(err); }
           // Reverse access log
       //    logs.reverse();
         //  if (logs.length === 0) logs = null;
-          console.log(log);
+        //鉴于安全性还没有考虑清楚，先讲logs设置为空，关闭查找最近log的自助注册功能。
+          logs = null;
+          //console.log(logs);
           res.render('myCards', {
             title: 'MyCards',
-            cards,
-            log
+            cards:cards,
+            logs:logs
           });
 
         });

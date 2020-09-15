@@ -15,11 +15,11 @@ const Card = require('../models/Card');//for resport
 exports.index = (req, res, next) => {
   Log.find((err, logs) => {
     if (err) { return next(err); }
-
     // Reverse access log
     logs.reverse();
 
     if (logs.length === 0) logs = null;
+    console.log(logs);
 
     res.render('access-log', {
       title: 'Access Log',
