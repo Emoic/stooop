@@ -10,16 +10,18 @@ block content
         th ID
         th locks
         th memberid
+        th name
         th 是否绑定账号
         th Description
         th
       for card in cards
         tr
-          td= card.uid 
+          td= card.uid
           td
-            if card.locks          
+            if card.locks
               for locks in card.locks
                 i= locks.name
+          td= card.name
           td= card.memberid
           td
             if card.memberid
