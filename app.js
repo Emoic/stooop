@@ -62,8 +62,8 @@ app.locals.moment = moment;
 
 
 const multer = require('multer');
-const upload = multer({dest:'/public/img/'});
-app.use(multer({dest:"/public/img/"}).single("profile_pic"));
+const upload = multer({dest:'./public/img/'});
+app.use(multer({dest:"./public/img/"}).single("profile_pic"));
 
 /**
  * Express configuration.
@@ -97,7 +97,7 @@ app.use(flash());
 app.post('/account/changePortrait', passportConfig.isAuthenticated, userController.changePortrait);
 //配置静态资源请求
 app.use('/public', express.static('public'));
- 
+
 
 app.use((req, res, next) => {
   lusca.csrf()(req, res, next);
@@ -112,7 +112,7 @@ app.use((req, res, next) => {
 //扫描二维码显示个人信息，无需登录验证
 const User = require('./models/User');
 app.use((req, res, next) => {
-  if (!req.user && 
+  if (!req.user &&
     req.path.indexOf('/account/getPersonalInformation')>-1){
     User.findById(req.query.id, (err, user) => {
     if (err) { return next(err); }

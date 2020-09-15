@@ -211,18 +211,16 @@ exports.findMyCards = (req, res, next) => {
       if (cards.length === 0) cards = null;
 
       //查看新卡
-        Log.findOne({new_card:true}).exec((err, logs) => {
+        Log.findOne({new_card:true}).exec((err, log) => {
           if (err) { return next(err); }
-
           // Reverse access log
-          logs.reverse();
-
-          if (logs.length === 0) logs = null;
-
+      //    logs.reverse();
+        //  if (logs.length === 0) logs = null;
+          console.log(log);
           res.render('myCards', {
             title: 'MyCards',
             cards,
-            logs
+            log
           });
 
         });
