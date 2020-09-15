@@ -222,7 +222,7 @@ exports.findMyCards = (req, res, next) => {
           res.render('myCards', {
             title: 'MyCards',
             cards,
-            logs.timestamps
+            logs
           });
 
         });
