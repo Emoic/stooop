@@ -14,10 +14,6 @@ block content
       .col-sm-8
         input.form-control(type='text', name='uid', id='uid' value=card.uid disabled)
     .form-group
-      label(class='col-sm-2 control-label', for='memberid') 账号
-      .col-sm-8
-        input.form-control(type='text', name='memberid', id='memberid', placeholder='登陆的邮箱', value=card.memberid disabled)
-    .form-group
       label(class='col-sm-2 control-label', for='name') 姓名
       .col-sm-8
         input.form-control(type='text', name='name', id='name' value=card.name)
@@ -26,29 +22,42 @@ block content
       .col-sm-8
         input.form-control(type='text', name='idcard', id='idcard' value=card.idcard)
     .form-group
-      label(class='col-sm-2 control-label', for='mobile') 手机号码
+      label(class='col-sm-2 control-label', for='mobile') 手机
       .col-sm-8
         input.form-control(type='text', name='mobile', id='mobile' value=card.mobile)
     .form-group
-      label(class='col-sm-2 control-label', for='qq') qq
+      label(class='col-sm-2 control-label', for='memberid') E-Mail
+      .col-sm-8
+        input.form-control(type='text', name='memberid', id='memberid', placeholder='电子邮件', value=card.memberid)
+    .form-group
+      label(class='col-sm-2 control-label', for='qq') QQ
       .col-sm-8
         input.form-control(type='text', name='qq', id='qq' value=card.qq)
     .form-group
-      label(class='col-sm-2 control-label', for='profield') 学院专业
+      label(class='col-sm-2 control-label', for='profield') 学院和专业
       .col-sm-8
         input.form-control(type='text', name='profield', id='profield' value=card.profield)
     .form-group
-      label(class='col-sm-2 control-label', for='description') 介绍
+      label(class='col-sm-2 control-label', for='description') 个人简介
       .col-sm-8
         textarea.form-control(name='description', id='description', rows='7')= card.description
     .form-group
-      label(class='col-sm-2 control-label') Assigned locks
+      label(class='col-sm-2 control-label') 申请的权限 locks
       .col-sm-8
         for lock in locks
           .checkbox
             label(for=lock._id)
               input(type='checkbox' id=lock._id name='locks' value=lock._id checked=lock.assigned)
               = lock.name
+    .form-group
+      label(class='col-sm-2 control-label' for='rank') 级别
+      .col-sm-8
+        input.form-control(type='number', name='rank', id='rank',value=card.rank)
+    .form-group
+      .col-sm-2
+      .col-sm-8
+        input(type='checkbox', name="checked",id="checked" ,value='true',checked=card.checked)
+        = '我已经仔细阅读信息，并确认接受这位小伙伴成为创客空间的会员!'
     .form-group
       .col-sm-offset-2.col-sm-8
         button.btn.btn-primary(type='submit')
