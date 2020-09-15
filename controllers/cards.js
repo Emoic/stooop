@@ -1,6 +1,7 @@
  const Card = require('../models/Card');
 const Lock = require('../models/Lock');
 const User = require('../models/User');
+const Log = require('../models/Log');
 
 /**
  * Log module.
@@ -23,7 +24,7 @@ exports.creatAccountByCard = (req, res, next) => {
       if (err) {return next(err);}
 
       existingUser.profile.profield = card.profield;
-      existingUser.save((err) => {       
+      existingUser.save((err) => {
         if (err) {return next(err);}
       });
 
@@ -56,7 +57,7 @@ exports.creatAccountByCard = (req, res, next) => {
       //   req.flash('success', { msg: 'account created successfully.' });
       //   return res.redirect('/cards/');
       // });
-    });   
+    });
   });
 };
 
@@ -81,7 +82,7 @@ const renderDetail = (res, card, locks) => {
  * @param  {Object} req - Express Request Object
  * @param  {Object} res - Express Response Object
  * @param  {Function} next - Express Middleware Function
- */ 
+ */
 exports.index = (req, res, next) => {
   Card.find()
     .populate('locks')
@@ -176,7 +177,7 @@ function deleteCard(req, res, next){
     if (err) return next(err);
 
     req.flash('success', { msg: 'Card deleted successfully.' });
-      
+
   });
 }
 /**
@@ -209,10 +210,22 @@ exports.findMyCards = (req, res, next) => {
 
       if (cards.length === 0) cards = null;
 
-      res.render('myCards', {
-        title: 'MyCards',
-        cards
-      });
+      //查看新卡
+        Log.findOne({new_card:true}).exec((err, logs) => {
+          if (err) { return next(err); }
+
+          // Reverse access log
+          logs.reverse();
+
+          if (logs.length === 0) logs = null;
+
+          res.render('myCards', {
+            title: 'MyCards',
+            cards,
+            logs.timestamps
+          });
+
+        });
+
     });
 };
-

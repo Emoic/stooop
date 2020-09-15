@@ -13,16 +13,19 @@ block content
         th
       for card in cards
         tr
-          td= card.uid 
+          td= card.uid
           td
-            if card.locks          
+            if card.locks
               for locks in card.locks
                 i= locks.name
           td= card.description
           td.text-right
             .btn-group
               a.btn.btn-primary(href='/cards/' + card.uid) Manage
-              a.btn.btn-danger(href='/cards/delete2/' + card.uid, onClick='return confirm("Really delete this card?")') Delete
-             
+              a.btn.btn-danger(href='/cards/delete2/' + card.uid, onClick='return confirm("确定删除吗？")') Delete
+
   else
     h4 No cards found
+    ol
+      for log in logs
+        li logs.lock_id ~ log.timestamps
