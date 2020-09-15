@@ -18,7 +18,7 @@ const User = require('../models/User');
  */
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect('/locks');
+    return res.redirect('/account');
   }
   res.render('account/login', {
     title: 'Login'
@@ -194,7 +194,7 @@ exports.postUpdateProfile2 = (req, res, next) => {
 };
 function postUpdateProfile(req, res, next){
 req.assert('email', 'Please enter a valid email address.').isEmail();
-  req.sanitize('email').normalizeEmail({ remove_dots: false });     
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
   const errors = req.validationErrors();
 
   if (errors) {
@@ -491,7 +491,7 @@ const fs = require('fs');
  * @param  {Object} req - Express Request Object
  * @param  {Object} res - Express Response Object
  */
-exports.changePortrait= (req, res, next) => {   
+exports.changePortrait= (req, res, next) => {
   //post传输方法要用body
   var fname=req.file.fieldname;//获取上传文件的名字
   var oname=req.file.originalname;//获取上传文件的原始名字
@@ -502,18 +502,18 @@ exports.changePortrait= (req, res, next) => {
   这里我们要用req.files查看原始文件的数据并且读取，待读取成功后进行下一步操作*/
   fs.readFile(req.file.path,(err,data)=>{
     //读取失败，说明没有上传成功
-    if(err){return res.send('上传失败')}  
+    if(err){return res.send('上传失败')}
     //否则读取成功，开始写入
     //声明图片名字为时间戳和随机数拼接成的，尽量确保唯一性
     let time=Date.now()+parseInt(Math.random()*999)+parseInt(Math.random()*2222);
     //拓展名
     let extname=req.file.mimetype.split('/')[1]
     //拼接成图片名
-    let keepname=time+'.'+extname      
+    let keepname=time+'.'+extname
     // 三个参数
     //1.图片的绝对路径
     //2.写入的内容
-    //3.回调函数  
+    //3.回调函数
     fs.writeFile(path.join(load,'/public/img/'+keepname),data,(err)=>{
     //写入文件
       if(err){
@@ -529,7 +529,5 @@ exports.changePortrait= (req, res, next) => {
         });
       });
     });
-  }); 
+  });
 };
-
-
