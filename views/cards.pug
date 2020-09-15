@@ -8,12 +8,13 @@ block content
     table.table
       tr
         th ID
-        th locks
-        th memberid
-        th name
-        th 添加人
-        th Description
-        th
+        th 锁
+        th 姓名
+        th 手机
+        th 邮箱
+        th 学院专业
+        th 确认人
+        th 操作
       for card in cards
         tr
           td= card.uid
@@ -22,13 +23,13 @@ block content
               for locks in card.locks
                 i= locks.name
           td= card.name
+          td= card.mobile
           td= card.memberid
+          td= card.profield
           td= card.whoaddid
-          td= card.description
           td.text-right
             .btn-group
               a.btn.btn-primary(href='/cards/' + card.uid) Manage
               a.btn.btn-danger(href='/cards/delete/' + card.uid, onClick='return confirm("Really delete this card?")') Delete
-              a.btn.btn-primary(href='/cards/creatAccountByCard/'+card.uid) CreatAccount
   else
     h4 No cards found
