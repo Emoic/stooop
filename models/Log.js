@@ -20,6 +20,7 @@ const Schema = mongoose.Schema;
 const logSchema = new Schema({
   lock_id: String,
   card_id: String,
+  card_name:String,
   score: Number,
   score_type: String,
   note: String,

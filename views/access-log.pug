@@ -2,23 +2,27 @@ extends layout
 
 block content
   .page-header
-    h3 Access Log
-
+    h3 
+      ='Access Log 最近' 
+      b= inxday
+      ='天'
   if logs
     table.table
       tr
         th Lock uid
         th Card uid
+        th Name
         th Success
         th New card
-        th User Score
-        th Score Type
+        //-th User Score
+        //-th Score Type
         th Date &amp; time
         th
       for log in logs
         tr
           td= log.lock_id
           td= log.card_id
+          td= log.card_name
           td
             if(log.success)
               h4.text-primary
@@ -33,8 +37,8 @@ block content
             else
               h4.text-danger
                 i.fa.fa-times
-          td=log.score
-          td=log.score_type
+          //-td=log.score
+          //-td=log.score_type
           td= moment(log.createdAt).format('YYYY.MM.DD, HH:mm')
           td.text-right
             a.btn.btn-primary(href='/cards/' + log.card_id) Manage card

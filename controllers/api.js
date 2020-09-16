@@ -72,6 +72,7 @@ exports.index = (req, res, next) => {
       const log = new Log({
         lock_id: lockId,
         card_id: cardId,
+        card_name:card.name,//将card的name记录的网站中，方便查看
         success: canAccess,
         new_card: false
       });

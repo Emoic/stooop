@@ -186,7 +186,7 @@ app.post('/card-apply/:id', cardsController.doCardApply);
 app.get('/cards/delete/:id', passportConfig.isAuthenticated, cardsController.deleteCard);
 app.get('/cards/delete2/:id', passportConfig.isAuthenticated, cardsController.deleteCard2);
 app.get('/cards/creatAccountByCard/:id', passportConfig.isAuthenticated, cardsController.creatAccountByCard);
-app.get('/access-log', passportConfig.isAuthenticated, logController.index);
+app.get('/access-log:inxday', passportConfig.isAuthenticated, logController.index);
 app.get('/access-log/score/report', passportConfig.isAuthenticated, logController.score_report);
 app.get('/access-log/:id', passportConfig.isAuthenticated, logController.showScore);
 app.post('/access-log/:id', passportConfig.isAuthenticated, logController.updateScore);

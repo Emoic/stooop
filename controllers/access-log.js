@@ -13,17 +13,23 @@ const Card = require('../models/Card');//for resport
  * @param  {Function} next - Express Middleware Function
  */
 exports.index = (req, res, next) => {
-  Log.find((err, logs) => {
+  //查看inxday参数指定的天以内的记录。
+  console.log(req.params);
+  var inxday = parseInt(req.params.inxday);
+  var inxdaytime = new Date(new Date().getTime() - 1000*60*60*24*parseInt(inxday));
+
+  Log.find({createdAt:{$gte:inxdaytime}}).exec((err, logs) => {
     if (err) { return next(err); }
     // Reverse access log
     logs.reverse();
 
     if (logs.length === 0) logs = null;
-    console.log(logs);
+    //console.log(logs);
 
     res.render('access-log', {
       title: 'Access Log',
-      logs
+      logs:logs,
+      'inxday':inxday
     });
   });
 };
