@@ -1,59 +1,45 @@
-# A Makerspace Management System Developed by Southwest Jiaotong University Makerspace ,based :Polis RFID Access System Extended 2
+# 介绍
 
-
-Web API for [RFID access system](https://github.com/ParalelniPolis/rfid-locks)
-
+交大创客空间门禁管理系统
 
 ## Dependencies
 
 * [Node.js](https://nodejs.org/) >= 6.0.0
 * [Mongo DB](https://www.mongodb.com/)
-* [Git](https://git-scm.com/)
-
 
 ## Setup
-
-Make sure you have the necessary [dependencies](#dependencies) before continuing.
-
-Get the code:
+取代码
 ```
 git clone https://github.com/swjtu-maker/stooop
 ```
-
+进入目录
 Change into the project directory:
 ```
 cd stooop
 ```
-
-Install application dependencies via npm or yarn:
+安装依赖
 ```
 npm install
 ```
-or
-```
-yarn
-```
-This will install all node modules that the project requires.
 
-## Running the Server
+## 启动
 
-To run the node.js server app:
 ```
 npm start
 ```
 
-## Configuration
+## 设置
 
-Configuration variables should be set via environment variables (database credentials, session secret, etc) in ``.env`` file - see ``.env.example``.
+配置文件在： ``.env`` file - see ``.env.example``.
 
-## Tests
+## 测试
 
 If you are working on the server part of the app, then you should run the tests to verify that you haven't broken anything:
 ```
 npm test
 ```
 
-## Documentation
+## 文档
 You can generate JSDoc documentation automatically by running
 ```
 npm run jsdoc
